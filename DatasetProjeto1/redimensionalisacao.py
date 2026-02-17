@@ -14,18 +14,16 @@ def calcular_intensidade(img):
 # simetria vertical: compara lado esquerdo com direito da imagem
 def calcular_simetria_vertical(img):
     esquerda = img[:, :14]
-    direita = img[:, 27:13:-1]
-    sv = np.abs(esquerda.astype(int) - direita.astype(int)).sum() / 255.0
+    direita = img[:, 14:][:, ::-1]
+    sv = np.abs(esquerda - direita).sum() / 255.0
     return sv
-
 
 # simetria horizontal: compara metade de cima com metade de baixo
 def calcular_simetria_horizontal(img):
     cima = img[:14, :]
-    baixo = img[27:13:-1, :]
-    sh = np.abs(cima.astype(int) - baixo.astype(int)).sum() / 255.0
+    baixo = img[14:, :][::-1, :]
+    sh = np.abs(cima - baixo).sum() / 255.0
     return sh
-
 
 # simetria total = vertical + horizontal
 def calcular_simetria(img):
